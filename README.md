@@ -27,7 +27,7 @@ How to start netty-livereload from the CLI
 ------------------
 The simplest way to start a livereload server from the command line is to use the "all in one" jar as below:
 
-  java -jar netty-livereload-0.1-allinone.jar PATH
+    java -jar netty-livereload-0.1-allinone.jar PATH
   
 *PATH* being the path to the folder containing your web files.
 
