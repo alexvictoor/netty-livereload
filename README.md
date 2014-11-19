@@ -2,13 +2,13 @@ netty-livereload
 ================
 
 [Livereload](http://livereload.com/) protocol implementation based on Netty websocket implementation.  
-The goal of this project is to provide an as lighweight as possible Java implementation of a livereload server.  
-It is strobgly inspired by [livereload-jvm](https://github.com/davidB/livereload-jvm) which is based on Jetty websocket implementation.  
+The goal of this project is to provide a livereload Java implementation as lighweight as possible .  
+It is strongly inspired by [livereload-jvm](https://github.com/davidB/livereload-jvm) which is based on Jetty websockets.  
 
 Livereload in a nutshell
 ----------------
-Livereload is a productivity tool  for web developers. During web development, it refreshs the browser each time a file has been changed on the server side.  
-Under the cover, livereload relies on a websocket connection between the browser and the server. On the browser side, javascript code (from livereload.js), opens the connection with the server and handle commands comming from the server. On the server, a process watchs filesystem changes and generates a refresh command when a file (html, css, js, ...) from the web UI has been modified.
+Livereload is a productivity tool  for web developers. During web development, it refreshs the browser each time a file has been changed on the server side such as a CSS stylesheet or an HTML document.  
+Under the cover, livereload relies on a websocket connection between the browser and the server. On the browser side, a javascript code (from livereload.js) opens a connection with a livereload server. Once the connection is established, commands can be exchanged between the server and the browser. On the server, a process watchs the filesystem for changes on web files (i.e. html, css, js, ...). When a file has been changed on the server, a command is send to the browser. This command once processed on the browser side generates a refresh of the current page.
 
 How to enable reload in the browser
 --------------
@@ -23,11 +23,28 @@ However it is not always possible to do so. If your application runs on a mobile
 *Snipset taken from the [livereload-js](https://github.com/livereload/livereload-js) website*
 
 
-How to start the livereload from the CLI
+How to start netty-livereload from the CLI
 ------------------
-TBD
+The simplest way to start a livereload server from the command line is to use the "all in one" jar as below:
+
+  java -jar netty-livereload-0.1-allinone.jar PATH
+  
+*PATH* being the path to the folder containing your web files.
 
 How to embed the livereload server in your application
 --------------------------
-TBD
+First you need to add a netty-livereload dependency to your project. Below a maven XML fragment to add in the dependencies section:
 
+    <dependency>
+      <groupId>com.github.alexvictoor</groupId>
+      <artifactId>netty-livereload</artifactId>
+      <version>0.1</version>
+    </dependency>
+
+Then you just need to create a WebSocketServer instance providing the path to your web files as a *String*. Port is optionnal, default value being 35729, which is the value specified in the livereload protocol specification.  
+Then you just need to start the server. Below a code example:
+
+    String rootFolder = "...";
+    WebSocketServer server = new WebSocketServer(rootFolder);
+    server.start();
+    
