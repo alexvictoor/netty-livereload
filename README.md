@@ -31,7 +31,8 @@ The simplest way to start a livereload server from the command line is to use th
 
     java -jar netty-livereload-0.1-allinone.jar PATH
   
-*PATH* being the path to the folder containing your web files.
+*PATH* being the path to the folder containing your web files.  
+This "all in one" jar is available for [download](https://oss.sonatype.org/service/local/repositories/releases/content/com/github/alexvictoor/netty-livereload/0.1/netty-livereload-0.1-allinone.jar) from maven central
 
 How to embed the livereload server in your application
 --------------------------
